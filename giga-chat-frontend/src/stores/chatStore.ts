@@ -12,6 +12,7 @@ export const ChatStore = defineStore({
     currentRoom: "",
     listOfRooms: [] as Room[],
     isTyping: [] as string[],
+    isListening: [] as string[],
   }),
   actions: {
     sendMessage(chat: Chat){
@@ -19,21 +20,27 @@ export const ChatStore = defineStore({
       chatService.sendMessage(chat);
     },
     getMessages(){
-      chatService.getMessage((data: Chat) => {
-        this.chats.push(data);
-      });
+      if(this.isListening.indexOf("getMessages") == -1 ) {
+        chatService.getMessage((data: Chat) => {
+          this.chats.push(data);
+        });
+        this.isListening.push("getMessages");
+      }
     },
     isTypingText(chat: Chat){
       chat.room = this.currentRoom;
       chatService.startTyping(chat);
     },
     updateTyping(){
-      chatService.updateIsTyping((data: string[]) => {
-        this.isTyping = [];
-        data.forEach((user) => {
-          this.isTyping.push(user);
-        });
-      });
+      if(this.isListening.indexOf("typing") == -1 ) {
+          chatService.updateIsTyping((data: string[]) => {
+            this.isTyping = [];
+            data.forEach((user) => {
+              this.isTyping.push(user);
+            });
+          });
+        this.isListening.push("typing");
+      }
     },
     joinChat(nameOfChat: string){
       this.chats = [
