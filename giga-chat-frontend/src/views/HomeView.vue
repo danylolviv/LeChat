@@ -3,5 +3,5 @@
 </script>
 
 <template>
-<h1>Hello your home</h1>
+<h1>Hello your homeeer</h1>
 </template>
