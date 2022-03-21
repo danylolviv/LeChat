@@ -82,5 +82,4 @@ a{
   color: hsla(160, 100%, 37%, 1);
   text-decoration: none;
 }
-
 </style>
