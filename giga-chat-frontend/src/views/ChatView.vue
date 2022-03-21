@@ -1,20 +1,23 @@
 <template>
   <div class="container">
     <h2>Send chat</h2>
-    <input v-model="txtChatInput" v-on:input="typing" placeholder="Enter chat" /> <br />
-    <button @click="sendChat">Send</button>
-    <ul>
-      <li v-for="(chat, index) in chatStore.isTyping" v-bind:key="index">
-        {{chat}} is typing
-      </li>
-    </ul>
-    <h2>{{chatStore.currentRoom}} chats:</h2>
+
+    <div class="chatHeader">
+      <strong>{{chatStore.currentRoom}} chats:</strong>
+      <strong class="justTyping" >Typing:</strong>
+      <div v-for="(chat, index) in chatStore.isTyping" v-bind:key="index">
+        <strong class="typingName">{{chat}}...</strong>
+      </div>
+    </div>
+
     <div class="chatContainer" >
       <div class="messageContainer" v-for="(chat, index) in chatStore.chats" v-bind:key="index">
         <strong class="name">{{chat.user}}</strong>
         <p class="message">{{chat.text}}</p>
       </div>
     </div>
+    <input v-model="txtChatInput" v-on:input="typing" placeholder="Enter chat" /> <br />
+    <button @click="sendChat">Send</button>
   </div>
 </template>
 
@@ -33,6 +36,7 @@ function sendChat(){
     user: userStore.userName,
     text: txtChatInput.value,
   });
+  txtChatInput.value = ''
 }
 
 function typing(){
@@ -44,6 +48,27 @@ function typing(){
 </script>
 
 <style scoped>
+.typingName{
+  color: hsla(160, 100%, 37%, 1);
+}
+
+.justTyping{
+  margin-left: 40%;
+}
+
+
+.chatHeader{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  background: #26343e;
+  width: 50%;
+  height: 60px;
+  padding-left: 20px;
+  color: #868585;
+}
+
 .name{
   color: hsla(160, 100%, 37%, 1);
   opacity: 0.7;
@@ -58,8 +83,9 @@ function typing(){
   height: 400px;
   width: 50%;
   background: #2c3e50;
-  border-radius: 15px;
+  border-radius: 15px 15px 15px 0px;
   overflow-x: hidden;
+  padding-bottom: 20px;
 }
 .messageContainer{
   margin: 7px;
