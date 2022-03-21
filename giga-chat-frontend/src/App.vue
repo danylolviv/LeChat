@@ -8,12 +8,13 @@ const userStore = UserStore();
 <template>
   <div class="container">
     <nav class="navbarContainer">
-      <RouterLink to="/">Home</RouterLink> |
-      <RouterLink to="/createUser">Create User</RouterLink> |
-      <RouterLink to="/room">Room</RouterLink>
-      <span v-if="userStore.userName.length > 0">
-      | Logged in as: {{ userStore.userName }}</span
-      >
+      <button><RouterLink to="/">Home</RouterLink></button>
+      <button><RouterLink to="/createUser">Create User</RouterLink> |</button>
+      <button><RouterLink to="/room">Room</RouterLink></button>
+      <div v-if="userStore.userName.length > 0" class="userIdf">
+        <button>User: {{ userStore.userName }}</button>
+      </div>
+
     </nav>
     <br />
     <RouterView />
@@ -41,5 +42,13 @@ nav button {
   padding: 1%;
   margin-right: 3%;
   background: #181818;
+  color: hsla(160, 100%, 37%, 1);
+  text-decoration: none;
+}
+
+.userIdf{
+  color: hsla(160, 100%, 37%, 1);
+  text-decoration: none;
+  border-bottom: solid ;
 }
 </style>
