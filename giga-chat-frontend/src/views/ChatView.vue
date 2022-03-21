@@ -1,18 +1,21 @@
 <template>
-  <h2>Send chat</h2>
-  <input v-model="txtChatInput" v-on:input="typing" placeholder="Enter chat" /> <br />
-  <button @click="sendChat">Send</button>
-  <ul>
-    <li v-for="(chat, index) in chatStore.isTyping" v-bind:key="index">
-      {{chat}} is typing
-    </li>
-  </ul>
-  <h2>{{chatStore.currentRoom}} chats:</h2>
-  <ul>
-    <li v-for="(chat, index) in chatStore.chats" v-bind:key="index">
-      {{chat.user}} : {{chat.text}}
-    </li>
-  </ul>
+  <div class="container">
+    <h2>Send chat</h2>
+    <input v-model="txtChatInput" v-on:input="typing" placeholder="Enter chat" /> <br />
+    <button @click="sendChat">Send</button>
+    <ul>
+      <li v-for="(chat, index) in chatStore.isTyping" v-bind:key="index">
+        {{chat}} is typing
+      </li>
+    </ul>
+    <h2>{{chatStore.currentRoom}} chats:</h2>
+    <div class="chatContainer" >
+      <div class="messageContainer" v-for="(chat, index) in chatStore.chats" v-bind:key="index">
+        <strong class="name">{{chat.user}}</strong>
+        <p class="message">{{chat.text}}</p>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -41,5 +44,59 @@ function typing(){
 </script>
 
 <style scoped>
+.name{
+  color: hsla(160, 100%, 37%, 1);
+  opacity: 0.7;
 
+}
+.chatContainer{
+  overflow: scroll;
+  height: 400px;
+  width: 50%;
+  background: #2c3e50;
+  border-radius: 15px;
+  overflow-x: hidden;
+
+}
+.messageContainer{
+  margin: 5px;
+  padding: 5px;
+  height: fit-content;
+  width: fit-content;
+  min-width: 200px;
+  border-radius: 5px 5px 5px 0px;
+  background: #181818;
+ color: white;
+}
+
+.container{
+  border-radius: 15px;
+  padding: 2%;
+  height: auto;
+  min-height: 650px;
+  background: #181818;
+  color: white;
+}
+
+input{
+  width: 50%;
+  border-color: hsla(160, 100%, 37%, 1);
+  background: #2c3e50;
+  color: hsla(160, 100%, 37%, 1);
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: hsla(160, 100%, 37%, 1);
+  opacity: 0.4; /* Firefox */
+}
+
+button{
+  width: 20%;
+  margin-left: 15%;
+  padding: 1%;
+  margin-right: 3%;
+  background: #181818;
+  color: hsla(160, 100%, 37%, 1);
+  text-decoration: none;
+}
 </style>
