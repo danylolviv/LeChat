@@ -47,8 +47,12 @@ function typing(){
 .name{
   color: hsla(160, 100%, 37%, 1);
   opacity: 0.7;
-
 }
+
+.message{
+  margin-bottom: 0;
+}
+
 .chatContainer{
   overflow: scroll;
   height: 400px;
@@ -56,11 +60,10 @@ function typing(){
   background: #2c3e50;
   border-radius: 15px;
   overflow-x: hidden;
-
 }
 .messageContainer{
-  margin: 5px;
-  padding: 5px;
+  margin: 7px;
+  padding: 5px 15px 3px 5px ;
   height: fit-content;
   width: fit-content;
   min-width: 200px;
